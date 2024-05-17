@@ -1,0 +1,21 @@
+# Ignore macOS .DS_STORE files
+.DS_Store
+
+# Other files to ignore
+.Rhistory
+.RData
+.Rproj.user
+
+# Python specific
+__pycache__/
+*.py[cod]
+*$py.class
+
+# R specific
+.Rproj.user/
+.Rhistory
+.RData
+.Ruserdata
+
+# Ignore data cache (optional, if you cache data in a specific directory)
+data/cache/

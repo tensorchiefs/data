@@ -1,0 +1,10 @@
+Package: edudat
+Type: Package
+Title: A Collection of Datasets for Teaching
+Version: 0.1
+Author: Oliver Dürr
+Maintainer: Oliver Dürr <oliver.duerr@gmail.com>
+Description: This package contains datasets for teaching statistics and data science.
+License: GPL-3
+RoxygenNote: 7.2.3
+Encoding: UTF-8
