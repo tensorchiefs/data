@@ -10,5 +10,10 @@ setup(
     ],
     author="Oliver Dürr",
     description="A package for educational datasets",
-    url="https://github.com/oduerr/data",
+    classifiers=[
+        "Programming Language :: Python :: 3",
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent",
+    ],
+    url="https://github.com/tensorchiefs/data",
 )
