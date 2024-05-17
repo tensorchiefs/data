@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 setup(
     name="edudat",
     version="0.001",
-    packages=find_packages(),
+    packages=["edudat"],
     install_requires=[
         "pandas",
         "requests",

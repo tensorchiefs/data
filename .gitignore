@@ -19,3 +19,4 @@ __pycache__/
 
 # Ignore data cache (optional, if you cache data in a specific directory)
 data/cache/
+/python/edudat.egg-info
