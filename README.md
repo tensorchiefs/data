@@ -1,64 +1,53 @@
 # Data Repository
 
-Dieses Repository enthält Datensätze sowie R- und Python-Pakete für den Unterricht in Statistik und Data Science.
+This repository contains datasets as well as R and Python packages for teaching statistics, data science and the like.
 
-## Struktur
+## Structure
 
-- `data/`: Enthält die CSV-Daten.
-- `R/`: Enthält das R-Package `edudat`.
-- `python/`: Enthält das Python-Package `edudat`.
+- `data/`: Contains the CSV data.
+- `R/`: Contains the R package `edudat`.
+- `python/`: Contains the Python package `edudat`.
 
-## Installation und Nutzung
+## Installation and Usage
 
 ### R
 
-1. **Installation des R-Pakets**:
-   - Installieren Sie das `devtools`-Paket, falls noch nicht vorhanden:
+1. **Installation of the R Package**:
+   - Install the `devtools` package if you haven't already:
      ```R
      install.packages("devtools")
      ```
 
-   - Installieren Sie das `edudat`-Paket direkt von GitHub:
+   - Install the `edudat` package directly from GitHub:
      ```R
-     devtools::install_github("oduerr/data/R/edudat")
+     devtools::install_github("tensorchiefs/data/R/edudat")
      ```
 
-2. **Verwendung des R-Pakets**:
-   - Laden Sie das `edudat`-Paket und die Datensätze:
+2. **Using the R Package**:
+   - Load the `edudat` package and datasets:
      ```R
      library(edudat)
-     df1 <- load_data("dataset1.csv")
-     df2 <- load_data("dataset2.csv")
+     df1 <- load_data("challenger.csv")
      ```
 
 ### Python
 
-1. **Installation des Python-Pakets**:
-   - Installieren Sie das `edudat`-Paket direkt von GitHub:
+1. **Installation of the Python Package**:
+   - Install the `edudat` package directly from GitHub:
      ```bash
-     pip install git+https://github.com/oduerr/data.git#subdirectory=python/edudat
+     pip install git+https://github.com/tensorchiefs/data.git#subdirectory=python/edudat
      ```
 
-2. **Verwendung des Python-Pakets**:
-   - Laden Sie die CSV-Daten in Python:
+2. **Using the Python Package**:
+   - Load the CSV data in Python:
      ```python
      from edudat import load_data
 
-     df1 = load_data("dataset1.csv")
-     df2 = load_data("dataset2.csv")
+     df1 = load_data("challenger.csv")
      ```
 
-## Datensätze
+## Contributing
 
-Die folgenden Datensätze sind im Repository enthalten:
-
-- `dataset1.csv`: Eine Beschreibung von dataset1.
-- `dataset2.csv`: Eine Beschreibung von dataset2.
-
-## Beitrag leisten
+If you would like to contribute to this repository, have a look at the [contribution howto](CONTRIBUTING.md).
 
 
-
-## Lizenz
-
-Dieses Projekt ist unter der GPL-3.0-Lizenz lizenziert - siehe die [LICENSE](LICENSE)-Datei für Details.
