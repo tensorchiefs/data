@@ -20,3 +20,7 @@ __pycache__/
 # Ignore data cache (optional, if you cache data in a specific directory)
 data/cache/
 /python/edudat.egg-info
+/python/dist
+/python/build
+R/edudat_0.1.tar.gz
+R/edudat_0.1.tar.gz

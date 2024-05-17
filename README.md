@@ -33,7 +33,11 @@ This repository contains datasets as well as R and Python packages for teaching 
 ### Python
 
 1. **Installation of the Python Package**:
-   - Install the `edudat` package directly from GitHub:
+   - Install the `edudat` package from PyPI:
+     ```bash
+     pip install edudat
+     ```
+   - Install the `edudat` package directly from GitHub (currently not working):
      ```bash
      pip install git+https://github.com/tensorchiefs/data.git#subdirectory=python/edudat
      ```
