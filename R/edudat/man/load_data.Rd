@@ -2,16 +2,18 @@
 % Please edit documentation in R/edudat.R
 \name{load_data}
 \alias{load_data}
-\title{Load dataset from GitHub and cache locally}
+\title{Load dataset from GitHub and cache it locally}
 \usage{
-load_data(name)
+load_data(name, verbose = FALSE)
 }
 \arguments{
-\item{name}{Name of the dataset (e.g., "dataset1.csv")}
+\item{name}{Name of the dataset (e.g., "challenger.csv")}
+
+\item{verbose}{Logical indicating whether to print messages}
 }
 \value{
 A data frame containing the dataset
 }
 \description{
-Load dataset from GitHub and cache locally
+Load dataset from GitHub and cache it locally
 }
