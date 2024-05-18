@@ -11,9 +11,10 @@ on:
 jobs:
   render:
     runs-on: ubuntu-latest
-
+    env:
+      GITHUB_PAT: ${{ secrets.MY_GITHUB_PAT }}
     steps:
-    - name: Checkout repository
+    - name: Checkout repository 2
       uses: actions/checkout@v2
 
     - name: Set up Quarto
@@ -24,22 +25,16 @@ jobs:
 
     - name: Install R packages
       run: |
-        Rscript -e 'install.packages(c("ggplot2", "knitr", "rmarkdown", "remotes"))'
-        Rscript -e 'remotes::install_github("tensorchiefs/data", subdir = "R/edudat")'  
+        Rscript -e 'install.packages(c("rmarkdown", "ggplot2", "remotes"))'
+        Rscript -e 'remotes::install_github("tensorchiefs/data", subdir = "R/edudat", auth_token = Sys.getenv("GITHUB_PAT"), dependencies = TRUE, upgrade = "always", verbose = TRUE)'
 
-    - name: Install Python packages
+    - name: Render test.qmd document
       run: |
-        pip install pandas matplotlib
-
-    - name: Render all Quarto documents
-      run: |
-        for qmd in data/*.qmd; do
-          quarto render "$qmd" --to html
-        done
+        quarto render data/test.qmd --to html
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        personal_token: ${{ secrets.MY_GITHUB_PAT }}
         publish_dir: ./data
         publish_branch: gh-pages
