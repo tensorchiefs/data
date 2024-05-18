@@ -16,6 +16,11 @@ __pycache__/
 .Rhistory
 .RData
 .Ruserdata
+R/edudat/man/*
+
+# Ignore rendered quarto files
+data/**/*_files/
+data/**.html
 
 # Ignore data cache (optional, if you cache data in a specific directory)
 data/cache/
@@ -24,3 +29,4 @@ data/cache/
 /python/build
 R/edudat_0.1.tar.gz
 R/edudat_0.1.tar.gz
+data/challenger_files/figure-html/plot_data-1.png

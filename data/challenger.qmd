@@ -12,7 +12,7 @@ https://homafiles.info/2016/06/06/the-challenger-disaster-a-tragic-lesson-in-dat
 
 ## Plotting in R
 
-```{r plot_data}
+```{r plot_data, echo=TRUE, eval=TRUE}
 data <- edudat::load_data("challenger.csv")
 library(ggplot2)
 ggplot(data, aes(x = Temp, y = Failure)) +

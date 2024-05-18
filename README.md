@@ -24,17 +24,16 @@ This repository contains datasets as well as R and Python packages for teaching 
      ```
 
 2. **Using the R Package**:
-   - Load the `edudat` package and datasets:
+  - Load the `edudat` package and datasets:
      ```R
      library(edudat)
      df <- load_data("challenger.csv")
      ```
-     
-    - Using additional functions (currently only in R), like plot_data:
+  - Using additional functions (currently only in R), like plot_data:
      ```R
-      plot_data(df)
+      plot_data(df) + theme_minimal()
      ```
-     Note that not all datasets have additional functions. They need to be defined in an accompanying qmd script. 
+     Note that not all datasets have additional functions. They need to be defined in an accompanying qmd script.  
 
 ### Python
 
