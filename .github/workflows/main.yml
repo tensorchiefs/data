@@ -33,7 +33,7 @@ jobs:
       run: |
         quarto render data/test.qmd --to html
 
-    - name: Deploy to GitHub Pages
+    - name: Deploy to GitHub Pages New
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
