@@ -27,8 +27,14 @@ This repository contains datasets as well as R and Python packages for teaching 
    - Load the `edudat` package and datasets:
      ```R
      library(edudat)
-     df1 <- load_data("challenger.csv")
+     df <- load_data("challenger.csv")
      ```
+     
+    - Using additional functions (currently only in R), like plot_data:
+     ```R
+      plot_data(df)
+     ```
+     Note that not all datasets have additional functions. They need to be defined in an accompanying qmd script. 
 
 ### Python
 
@@ -36,10 +42,6 @@ This repository contains datasets as well as R and Python packages for teaching 
    - Install the `edudat` package from PyPI:
      ```bash
      pip install edudat
-     ```
-   - Install the `edudat` package directly from GitHub (currently not working):
-     ```bash
-     pip install git+https://github.com/tensorchiefs/data.git#subdirectory=python/edudat
      ```
 
 2. **Using the Python Package**:

@@ -16,6 +16,7 @@ https://homafiles.info/2016/06/06/the-challenger-disaster-a-tragic-lesson-in-dat
 data <- edudat::load_data("challenger.csv")
 library(ggplot2)
 ggplot(data, aes(x = Temp, y = Failure)) +
-  geom_point() +
+  geom_point() + 
+  xlab("Temperature (F)") +
   ggtitle("Challenger O-Ring Data")
 ```

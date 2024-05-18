@@ -1,15 +1,17 @@
-# Internal function to execute specific code chunks from Quarto documents
+### Internal Functions (not exposed) #####
 execute_quarto_chunk <- function(file, chunk_name) {
   lines <- readLines(file)
   in_chunk <- FALSE
   code_lines <- c()
   
   for (line in lines) {
-    if (grepl(paste0("```{r ", chunk_name), line)) {
+    print(line)
+    pattern <- "```\\{r plot_data.*"
+    if (grepl(pattern, line)){
       in_chunk <- TRUE
       next
     }
-    if (in_chunk && grepl("```", line)) {
+    if (in_chunk && grepl("```", line, fixed = TRUE)) {
       in_chunk <- FALSE
       break
     }

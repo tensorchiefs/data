@@ -7,11 +7,9 @@
 plot_data <- function(df) {
   # Get the name of the dataset from the attribute
   dataset_name <- attr(df, "dataset_name")
-  quarto_file <- paste0(dataset_name, ".qmd")
-  load_quarto_chunk(quarto_file)
-  
+  quarto_file = load_quarto_file(paste0(dataset_name, ".qmd")) 
   if (file.exists(quarto_file)) {
-    execute_quarto_chunk(quarto_file, plot_function)
+    execute_quarto_chunk(quarto_file, "plot_function")
   } else {
     stop("Quarto document not found: ", quarto_file)
   }
@@ -137,3 +135,4 @@ list_cache_files <- function() {
   
   return(file_details)
 }
+
