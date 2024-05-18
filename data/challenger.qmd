@@ -1,6 +1,7 @@
 ---
 title: "Challenger Dataset"
 ---
+Should be rendered at https://tensorchiefs.github.io/data/data/challenger.html
 
 ## Description
 

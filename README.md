@@ -53,6 +53,6 @@ This repository contains datasets as well as R and Python packages for teaching 
 
 ## Contributing
 
-If you would like to contribute to this repository, have a look at the [contribution howto](CONTRIBUTING.md).
+Contributions are welcomed at a later stage, have a look at the [contribution howto](CONTRIBUTING.md).
 
 
