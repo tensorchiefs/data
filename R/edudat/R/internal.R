@@ -3,9 +3,8 @@ execute_quarto_chunk <- function(file, chunk_name) {
   lines <- readLines(file)
   in_chunk <- FALSE
   code_lines <- c()
-  
   for (line in lines) {
-    print(line)
+    #print(line)
     pattern <- "```\\{r plot_data.*"
     if (grepl(pattern, line)){
       in_chunk <- TRUE
