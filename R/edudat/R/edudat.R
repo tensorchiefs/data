@@ -4,6 +4,9 @@
 #'
 #' @param df A data frame containing the dataset
 #' @export
+#' @examples
+#' df <- load_data("challenger.csv")
+#' plot_data(df)
 plot_data <- function(df) {
   # Get the name of the dataset from the attribute
   dataset_name <- attr(df, "dataset_name")
@@ -14,6 +17,7 @@ plot_data <- function(df) {
     stop("Quarto document not found: ", quarto_file)
   }
 }
+
 
 #### Data Handling ####
 
@@ -80,7 +84,8 @@ load_data <- function(name, verbose = FALSE) {
   # Load the data into a data frame
   df = read.csv(file_path, stringsAsFactors = FALSE)
   
-  # Adding the dataset name as an attribute
+  # Adding the dataset name as an attribute i.e. strip .csv or .csv.gz
+  name = gsub(".csv.gz", "", name)
   name = gsub(".csv", "", name)
   attr(df, "dataset_name") <- name
   
