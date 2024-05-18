@@ -1,6 +1,7 @@
 ---
 title: "Challenger Dataset"
 ---
+
 Should be rendered at https://tensorchiefs.github.io/data/data/challenger.html
 
 ## Description
@@ -8,8 +9,8 @@ Should be rendered at https://tensorchiefs.github.io/data/data/challenger.html
 This dataset contains information about the O-rings of the solid rocket boosters used in the Space Shuttle program. The data was collected during the investigation of the Space Shuttle Challenger disaster in 1986 (Rogers commission). Here we provide a binarized version of the original dataset, where the dependent variable `y` indicates whether at least O-ring failed (1) or not (0). This data is used in the example of logistic regression.
 
 ### Further Information
-A nice background story about the Challenger disaster and the fatal data analysis done can be found in:
-https://homafiles.info/2016/06/06/the-challenger-disaster-a-tragic-lesson-in-data-analysis/
+
+A nice background story about the Challenger disaster and the fatal data analysis done can be found in: [the-challenger-disaster-a-tragic-lesson-in-data-analysis](https://homafiles.info/2016/06/06/the-challenger-disaster-a-tragic-lesson-in-data-analysis/)
 
 ## Plotting in R
 
@@ -17,7 +18,6 @@ https://homafiles.info/2016/06/06/the-challenger-disaster-a-tragic-lesson-in-dat
 data <- read.csv("https://raw.githubusercontent.com/tensorchiefs/data/main/data/challenger.csv", stringsAsFactors = FALSE)
 plot(Failure~Temp,data)
 ```
-
 
 ```{r plot_data, echo=TRUE, eval=FALSE}
 data <- read.csv("https://raw.githubusercontent.com/tensorchiefs/data/main/data/challenger.csv", stringsAsFactors = FALSE)
