@@ -1,4 +1,4 @@
-name: Render and Deploy Quarto Documents
+name: Render and Deploy All Quarto Documents
 
 on:
   push:
@@ -29,15 +29,17 @@ jobs:
 
     - name: Install R packages
       run: |
-        Rscript -e 'install.packages(c("ggplot2"))'
+        Rscript -e 'install.packages(c("ggplot2", "knitr", "rmarkdown"))'
 
     - name: Install Python packages
       run: |
         pip install pandas matplotlib
 
-    - name: Render Quarto documents
+    - name: Render all Quarto documents
       run: |
-        quarto render data/challenger.qmd --to html
+        for qmd in data/*.qmd; do
+          quarto render "$qmd" --to html
+        done
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
