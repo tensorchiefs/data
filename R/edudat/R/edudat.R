@@ -67,9 +67,11 @@ cache_file <- function(name, url, verbose = FALSE) {
 #'
 #' @param name Name of the dataset (e.g., "challenger.csv")
 #' @param verbose Logical indicating whether to print messages
+#' @param show_code Logical indicating whether to just show code, 
+#' so that the data can be loaded w/o the package
 #' @return A data frame containing the dataset
 #' @export
-load_data <- function(name, verbose = FALSE) {
+load_data <- function(name, verbose = FALSE, show_code = FALSE) {
   # Throw an error if the file name does not end with ".csv"
   if (!grepl(".csv$", name)) {
     stop("Invalid file format. Currently only CSV Files are supported.")
@@ -88,6 +90,13 @@ load_data <- function(name, verbose = FALSE) {
   name = gsub(".csv.gz", "", name)
   name = gsub(".csv", "", name)
   attr(df, "dataset_name") <- name
+  
+  # Show the code if requested, by printing the data frame
+  if (show_code) {
+    message("# Copy&Paste this code to load the data into R:")
+    message("data <- read.csv(\"", download_url, "\", stringsAsFactors = FALSE)")
+    message("# Copy&Paste this code to load the data into Python:")
+  }
   
   return (df)
 }

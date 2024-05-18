@@ -25,8 +25,8 @@ jobs:
     - name: Install R packages
       run: |
         Rscript -e 'install.packages(c("ggplot2", "knitr", "rmarkdown", "remotes"))'
-        Rscript -e 'remotes::install_github("tensorchiefs/data", subdir = "R/edudat")'  
-
+        Rscript -e 'remotes::install_github("tensorchiefs/data", subdir = "R/edudat", dependencies = TRUE, upgrade = "always", verbose = TRUE)'
+  
     - name: Install Python packages
       run: |
         pip install pandas matplotlib
