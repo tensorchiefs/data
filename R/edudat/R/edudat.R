@@ -104,7 +104,7 @@ load_data <- function(name, verbose = FALSE, show_code = FALSE) {
 
 #' Load the Quarto documentation file from repository and cache it locally
 #' 
-#' @param name Name of the Quarto file (e.g., "challenger.qmd")
+#' @param name Name of the Quarto file (e.g., "challenger.qmd" or "test.csv.gz")
 #' @param verbose Logical indicating whether to print messages
 #' @return The path to the cached Quarto file
 #' @export
@@ -152,12 +152,47 @@ list_cache_files <- function() {
 }
 
 ### misc functions ####
-#' Shows the URL of the package on GitHub
-#' 
-#' @export
-show_url <- function() {
-  message("")
+show_mini_help <- function() {
+  # Define the URL and the display text
+  html_content <- "
+  <html>
+  <body>
+  
+  <h2>edudat package</h2>
+  
+  <b>Loading the data:</b>
+  <pre>
+  <code>
+  df <- edudat::load_data('challenger.csv')
+  plot_data(df)
+  </code>
+  </pre>
+  
+  <b>Info:</b>
+  <pre>
+  <code>
+  edudat::list_cache_files()
+  </code>
+  </pre>
+  
+  For more see: 
+  <a href='https://github.com/tensorchiefs/data/'>github.com/tensorchiefs/data/</a>
+  
+  </body>
+  </html>"
+  
+  # Write the HTML content to a temporary file
+  temp_file <- tempfile(fileext = ".html")
+  writeLines(html_content, temp_file)
+  
+  # Open the HTML file in the Viewer pane
+  rstudioapi::viewer(temp_file)
 }
+
+# Example usage of the show_mini_help function
+show_mini_help()
+
+
 
 
 
