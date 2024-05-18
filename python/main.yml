@@ -32,6 +32,8 @@ jobs:
         pip install pandas matplotlib
 
     - name: Render all Quarto documents
+      env:
+        GITHUB_PAT: ${{ secrets.MY_GITHUB_PAT }}
       run: |
         #for qmd in data/*.1qmd; do
         #  quarto render "$qmd" --to html
