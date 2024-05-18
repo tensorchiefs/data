@@ -15,11 +15,7 @@ https://homafiles.info/2016/06/06/the-challenger-disaster-a-tragic-lesson-in-dat
 
 ```{r plot_data_old, echo=TRUE, eval=TRUE}
 data <- read.csv("https://raw.githubusercontent.com/tensorchiefs/data/main/data/challenger.csv", stringsAsFactors = FALSE)
-library(ggplot2)
-ggplot(data, aes(x = Temp, y = Failure)) +
-  geom_point() + 
-  xlab("Temperature (F)") +
-  ggtitle("Challenger O-Ring Data")
+plot(Failure~Temp,data)
 ```
 
 
