@@ -14,8 +14,7 @@ jobs:
     env:
       GITHUB_PAT: ${{ secrets.MY_GITHUB_PAT }}
     steps:
-
-    - name: Checkout repository Hallo
+    - name: Checkout repository 2
       uses: actions/checkout@v2
 
     - name: Set up Quarto
@@ -26,16 +25,16 @@ jobs:
 
     - name: Install R packages
       run: |
-        Rscript -e 'install.packages(c("rmarkdown"))'
-        #Rscript -e 'remotes::install_github("tensorchiefs/data", subdir = "R/edudat", auth_token = Sys.getenv("GITHUB_PAT"), dependencies = TRUE, upgrade = "always", verbose = TRUE)'
-  
+        Rscript -e 'install.packages(c("rmarkdown", "ggplot2", "remotes"))'
+        Rscript -e 'remotes::install_github("tensorchiefs/data", subdir = "R/edudat", auth_token = Sys.getenv("GITHUB_PAT"), dependencies = TRUE, upgrade = "always", verbose = TRUE)'
+
     - name: Render test.qmd document
       run: |
         quarto render data/test.qmd --to html
 
-    - name: Deploy to GitHub Pages New
+    - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        personal_token: ${{ secrets.MY_GITHUB_PAT }}
         publish_dir: ./data
         publish_branch: gh-pages
