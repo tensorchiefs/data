@@ -94,8 +94,9 @@ load_data <- function(name, verbose = FALSE, show_code = FALSE) {
   # Show the code if requested, by printing the data frame
   if (show_code) {
     message("# Copy&Paste this code to load the data into R:")
-    message("data <- read.csv(\"", download_url, "\", stringsAsFactors = FALSE)")
-    message("# Copy&Paste this code to load the data into Python:")
+    message("df <- read.csv(\"", download_url, "\", stringsAsFactors = FALSE)")
+    message("# Copy&Paste this code to load the data into Python (need pandas as pd)")
+    message("df = pd.read_csv(\"", download_url, "\")")
   }
   
   return (df)
@@ -149,4 +150,19 @@ list_cache_files <- function() {
   
   return(file_details)
 }
+
+### misc functions ####
+#' Shows the URL of the package on GitHub
+#' 
+#' @export
+show_url <- function() {
+  message("")
+}
+
+
+
+
+
+
+
 
