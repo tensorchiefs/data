@@ -29,9 +29,8 @@ jobs:
 
     - name: Install R packages
       run: |
-        Rscript -e 'install.packages(c("ggplot2", "knitr", "rmarkdown", "devtools"))'
-        Rscript -e 'devtools::install_github("tensorchiefs/data/R/edudat")'  
-
+        Rscript -e 'install.packages(c("ggplot2", "knitr", "rmarkdown", "remotes"))'
+        Rscript -e 'remotes::install_github("tensorchiefs/data/R/edudat")'  # Replace with your GitHub username and repository
 
     - name: Install Python packages
       run: |
