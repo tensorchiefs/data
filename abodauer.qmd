@@ -1,0 +1,18 @@
+---
+title: "Abodauern"
+---
+Should be rendered at https://tensorchiefs.github.io/data/data/challenger.html
+
+## Description
+
+This data set contains the time (in month) a swiss newpaper has been subscribed to by a customer. 
+
+## Plotting in R
+
+```{r plot_data, echo=TRUE, eval=TRUE}
+data <- edudat::load_data("abodauer.csv")
+library(ggplot2)
+ggplot(data, aes(x = x)) +
+  geom_histogram() + 
+  xlab("Dauer (Monaten)") 
+```
