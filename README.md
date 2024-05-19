@@ -26,9 +26,10 @@ This repository contains [datasets](https://github.com/tensorchiefs/data/blob/ma
             library(edudat)
             df <- load_data("challenger.csv")
           ```
-    -   Showing the dataset
+    -   Showing the dataset and other functionality
           ```R
            show_data(df)
+           list_cache_files() #Lists all the cached files
           ```
     -   Using additional functions (currently only in R), like plot_data:
           ```R
