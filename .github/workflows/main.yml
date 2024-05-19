@@ -11,6 +11,8 @@ on:
 jobs:
   render:
     runs-on: ubuntu-latest
+    env:
+      GITHUB_PAT: ${{ secrets.MY_GITHUB_PAT }}
 
     steps:
     - uses: actions/checkout@v4
@@ -20,25 +22,26 @@ jobs:
         git config --global user.name 'github-actions[bot]'
         git config --global user.email 'github-actions[bot]@users.noreply.github.com'
 
+    - name: Fetch all branches
+      run: git fetch --all
+
     - name: Check if docs branch exists
       id: check_docs_branch
       run: |
-        if git show-ref --verify --quiet refs/heads/docs; then
-          echo "Branch docs exists"
-          echo "branch-exists=true" >> $GITHUB_ENV
+        if git show-ref --verify --quiet refs/remotes/origin/docs; then
+          echo "branch_exists=true" >> $GITHUB_ENV
         else
-          echo "Branch docs does not exist"
-          echo "branch-exists=false" >> $GITHUB_ENV
+          echo "branch_exists=false" >> $GITHUB_ENV
         fi
 
     - name: Create docs branch if it does not exist
-      if: env.branch-exists == 'false'
+      if: env.branch_exists == 'false'
       run: |
         git checkout -b docs
         git push https://x-access-token:${{ secrets.MY_GITHUB_PAT }}@github.com/tensorchiefs/data.git docs
 
     - name: Checkout docs branch if it exists
-      if: env.branch-exists == 'true'
+      if: env.branch_exists == 'true'
       run: |
         git checkout docs
 
@@ -59,16 +62,7 @@ jobs:
     
     - name: Commit and push rendered files to docs branch
       run: |
+        cp -r data/* .
         git add .
         git commit -m 'Update rendered documentation' || echo "No changes to commit"
         git push https://x-access-token:${{ secrets.MY_GITHUB_PAT }}@github.com/tensorchiefs/data.git docs
-      env:
-        GITHUB_PAT: ${{ secrets.MY_GITHUB_PAT }}
-
-    # Optional deployment step, commented out for now
-    # - name: Deploy to GitHub Pages
-    #   uses: peaceiris/actions-gh-pages@v3
-    #   with:
-    #     personal_token: ${{ secrets.MY_GITHUB_PAT }}
-    #     publish_dir: ./data
-    #     publish_branch: gh-docs
