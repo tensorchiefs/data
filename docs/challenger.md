@@ -5,7 +5,9 @@ Rendered from
 
 This file can be loaded with:
 
-    df = load_data('challenger.csv')
+``` r
+df <- load_data('challenger.csv')
+```
 
 ## Description
 
