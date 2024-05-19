@@ -64,9 +64,12 @@ jobs:
     - name: Set up Quarto
       uses: quarto-dev/quarto-actions/setup@v2
 
-    - name: Install specific R packages
+    - name: Install specific R packages 
       run: |
         Rscript -e 'install.packages(c("rmarkdown", "ggplot2", "remotes"))'
+
+    - name: Install edudat package
+      run: | 
         Rscript -e 'remotes::install_github("tensorchiefs/data", subdir = "R/edudat", dependencies = TRUE, upgrade = "always", verbose = TRUE)'
 
     - name: Render QMD files
