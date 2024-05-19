@@ -1,9 +1,9 @@
 # Summary of Rendered Files
 
 
-- [abodauer.qmd](./abodauer.md)
+- [Abodauern](./abodauer.md)
 
-- [challenger.qmd](./challenger.md)
+- [Challenger Dataset](./challenger.md)
 
-- [lr4.qmd](./lr4.md)
+- [4 Random Data Points](./lr4.md)
 
