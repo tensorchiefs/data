@@ -4,12 +4,15 @@
 \alias{load_data}
 \title{Load dataset from GitHub and cache it locally}
 \usage{
-load_data(name, verbose = FALSE)
+load_data(name, verbose = FALSE, show_code = FALSE)
 }
 \arguments{
 \item{name}{Name of the dataset (e.g., "challenger.csv")}
 
 \item{verbose}{Logical indicating whether to print messages}
+
+\item{show_code}{Logical indicating whether to just show code, 
+so that the data can be loaded w/o the package}
 }
 \value{
 A data frame containing the dataset
