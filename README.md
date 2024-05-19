@@ -50,7 +50,6 @@ This repository contains [datasets](https://github.com/tensorchiefs/data/blob/ma
 
         ``` python
         from edudat import load_data
-
         df1 = load_data("challenger.csv")
         ```
 
