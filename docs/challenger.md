@@ -1,8 +1,5 @@
 # Challenger Dataset
 
-Should be rendered at
-https://tensorchiefs.github.io/data/data/challenger.html
-
 ## Description
 
 This dataset contains information about the O-rings of the solid rocket
