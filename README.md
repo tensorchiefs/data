@@ -3,38 +3,37 @@
 This repository contains [datasets](https://github.com/tensorchiefs/data/blob/main/docs/) as well as R and Python packages for teaching statistics, data science, and related subjects.
 
 
-## Installation and Usage
+## Installation and simple Usage
 
 ### R
 
-1.  **Installation of the R Package**:
-    -   Install the `devtools` package if you haven't already:
-        ``` r
-        install.packages("devtools")
-        ```
-    
-    -   Install the `edudat` package directly from GitHub:
-    
-        ``` r
-        devtools::install_github("tensorchiefs/data/R/edudat")
-        ```
+**Installing the Released Version (no release yet)**
 
-2.  **Using the R Package**:
+    ``` r
+       install.packages("https://github.com/tensorchiefs/data/releases/download/testrelease/edudat_0.1.tar.gz", repos = NULL, type = "source")
+    ```           
+**Using the R Package**:
 
-    -   Load the `edudat` package and datasets:
-          ```R
-            library(edudat)
-            df <- load_data("challenger.csv")
-          ```
-    -   Showing the dataset
-          ```R
-           show_data(df)
-          ```
-    -   Using additional functions (currently only in R), like plot_data:
-          ```R
-          plot_data(df) + theme_minimal()
-          ```
-        Note that not all datasets have additional functions. They need to be defined in an accompanying qmd script.
+Load the `edudat` package and datasets:
+  
+      ```R
+        library(edudat)
+        df <- load_data("challenger.csv")
+      ```
+      
+Showing the dataset and other functionality
+  
+      ```R
+       show_data(df)
+       list_cache_files() #Lists all the cached files
+      ```
+      
+Using additional functions (currently only in R), like plot_data:
+  
+      ```R
+      plot_data(df) + theme_minimal()
+      ```
+    Note that not all datasets have additional functions. They need to be defined in an accompanying qmd script.
 
 ### Python
 
@@ -49,7 +48,6 @@ This repository contains [datasets](https://github.com/tensorchiefs/data/blob/ma
 
         ``` python
         from edudat import load_data
-
         df1 = load_data("challenger.csv")
         ```
 
@@ -72,6 +70,17 @@ Please ensure that `eval=FALSE` is set in the code chunk options if the code is 
 -   `R/`: Contains the R package `edudat`.
 -   `python/`: Contains the Python package `edudat`.
 -   `docs/`: Contain documentation on the dataset
+
+## Advanced Issue
+
+### R
+
+**Installation of the R Package (as in githup main)**:
+``` r
+install.packages("devtools") #Install the `devtools` package if you haven't already:
+#Install the `edudat` package directly from GitHub:
+devtools::install_github("tensorchiefs/data/R/edudat")
+```
 
 ## Contributing
 
