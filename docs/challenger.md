@@ -1,9 +1,7 @@
 # Challenger Dataset
 
-# Rendered from challenger.qmd
-
-[Link to original
-file](https://github.com/tensorchiefs/data/tree/docs/data/challenger.qmd)
+\[Rendered from
+\]challenger.qmd(https://github.com/tensorchiefs/data/tree/docs/data/challenger.qmd)
 
 ## Description
 
@@ -25,10 +23,23 @@ https://homafiles.info/2016/06/06/the-challenger-disaster-a-tragic-lesson-in-dat
 
 ### Addtional Functionality
 
+Additional functionality, note that this is not excecuted in the
+document. Also note the name.
+
+#### Standart Function
+
+Code junks named `plot_data` are reserved names and by convention they
+appear in many other datasets.
+
 ``` r
+#plot_data
 library(ggplot2)
 ggplot(data, aes(x = Temp, y = Failure)) +
   geom_point() + 
   xlab("Temperature (F)") +
   ggtitle("Challenger O-Ring Data")
 ```
+
+#### Custom Functions
+
+TODO
