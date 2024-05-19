@@ -38,7 +38,6 @@ get_cache_dir <- function() {
 #' @param url URL from where to download the file
 #' @param verbose Logical indicating whether to print messages
 #' @return The path to the cached file
-#' @export
 cache_file <- function(name, url, verbose = FALSE) {
   cache_dir <- get_cache_dir()
   
@@ -107,7 +106,6 @@ load_data <- function(name, verbose = FALSE, show_code = FALSE) {
 #' @param name Name of the Quarto file (e.g., "challenger.qmd" or "test.csv.gz")
 #' @param verbose Logical indicating whether to print messages
 #' @return The path to the cached Quarto file
-#' @export
 load_quarto_file <- function(name, verbose = FALSE) {
   # Throw an error if the file name does not end with ".qmd"
   if (!grepl(".qmd$", name)) {
@@ -153,6 +151,24 @@ list_cache_files <- function() {
 
 ### misc functions ####
 
+#' Open the documentation page for a dataset in the default web browser
+#' 
+#' @param df A data frame containing the dataset
+#' @export
+#' @examples
+#' df <- load_data("challenger.csv")
+#' show_data(df)
+show_data = function(df) {
+  dataset_name <- attr(df, "dataset_name")
+  doc_url <- paste0("https://github.com/tensorchiefs/data/blob/main/docs/", dataset_name, ".md")
+  # If using RStudio and prefer to open in the Viewer pane
+  #if (rstudioapi::isAvailable()) {
+  #  rstudioapi::viewer("https://github.com/tensorchiefs/data/blob/main/docs/challenger.md")
+  #} else{
+  browseURL(doc_url)
+  #}
+}
+
 #' Show a mini help page in the RStudio Viewer pane
 #' 
 #' @export
@@ -181,6 +197,9 @@ show_mini_help <- function() {
   
   For more see: 
   <a href='https://github.com/tensorchiefs/data/'>github.com/tensorchiefs/data/</a>
+  or the 
+  <a href='https://github.com/tensorchiefs/data/tree/main/docs'>docs</a> 
+ 
   
   </body>
   </html>"
