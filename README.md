@@ -1,6 +1,7 @@
-# Data Repository
+# Tensorchiefs Data Collection and Tools
 
-This repository contains datasets as well as R and Python packages for teaching statistics, data science and the like.
+This repository contains [datasets](https://github.com/tensorchiefs/data/blob/main/docs/) as well as R and Python packages for teaching statistics, data science, and related subjects.
+
 
 ## Installation and Usage
 
@@ -24,6 +25,10 @@ This repository contains datasets as well as R and Python packages for teaching 
           ```R
             library(edudat)
             df <- load_data("challenger.csv")
+          ```
+    -   Showing the dataset
+          ```R
+           show_data(df)
           ```
     -   Using additional functions (currently only in R), like plot_data:
           ```R
