@@ -1,4 +1,4 @@
-name: Render and Deploy All Quarto Documents
+name: Render and Deploy All Quarto Documents 
 
 on:
   push:
