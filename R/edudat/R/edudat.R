@@ -152,6 +152,10 @@ list_cache_files <- function() {
 }
 
 ### misc functions ####
+
+#' Show a mini help page in the RStudio Viewer pane
+#' 
+#' @export
 show_mini_help <- function() {
   # Define the URL and the display text
   html_content <- "
@@ -186,11 +190,14 @@ show_mini_help <- function() {
   writeLines(html_content, temp_file)
   
   # Open the HTML file in the Viewer pane
-  rstudioapi::viewer(temp_file)
+  if (rstudioapi::isAvailable()) {
+      rstudioapi::viewer(temp_file)
+  } else {
+    # Alternative code or error handling for non-RStudio environment
+    stop("This function requires RStudio to be running")
+  }
+  
 }
-
-# Example usage of the show_mini_help function
-show_mini_help()
 
 
 
