@@ -1,4 +1,4 @@
-name: Render and Deploy All Quarto Documents 
+name: Render and Deploy All Quarto Documents
 
 on:
   push:
@@ -11,6 +11,8 @@ on:
 jobs:
   render:
     runs-on: ubuntu-latest
+    env:
+      GITHUB_PAT: ${{ secrets.MY_GITHUB_PAT }}
 
     steps:
     - uses: actions/checkout@v4
@@ -19,6 +21,9 @@ jobs:
       run: |
         git config --global user.name 'github-actions[bot]'
         git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+
+    - name: Verify the PAT is set
+      run: echo "Checking PAT: ${{ secrets.MY_GITHUB_PAT }}"
 
     - name: Create a test file
       run: echo "This is a test file for debugging" > testfile.txt
@@ -30,7 +35,8 @@ jobs:
 
     - name: Push the test file to the main branch
       run: |
-        git push https://x-access-token:${{ secrets.MY_GITHUB_PAT }}@github.com/tensorchiefs/data.git main
+        git remote set-url origin https://x-access-token:${{ secrets.MY_GITHUB_PAT }}@github.com/tensorchiefs/data.git
+        git push origin main
 
     - name: Fetch all branches
       run: git fetch --all
@@ -48,7 +54,7 @@ jobs:
       if: env.branch_exists == 'false'
       run: |
         git checkout -b docs
-        git push https://x-access-token:${{ secrets.MY_GITHUB_PAT }}@github.com/tensorchiefs/data.git docs
+        git push origin docs
 
     - name: Checkout docs branch if it exists
       if: env.branch_exists == 'true'
@@ -75,14 +81,4 @@ jobs:
         cp -r data/* .
         git add .
         git commit -m 'Update rendered documentation' || echo "No changes to commit"
-        git push https://x-access-token:${{ secrets.MY_GITHUB_PAT }}@github.com/tensorchiefs/data.git docs
-      env:
-        GITHUB_PAT: ${{ secrets.MY_GITHUB_PAT }}
-
-    # Optional deployment step, commented out for now
-    # - name: Deploy to GitHub Pages
-    #   uses: peaceiris/actions-gh-pages@v3
-    #   with:
-    #     personal_token: ${{ secrets.MY_GITHUB_PAT }}
-    #     publish_dir: ./data
-    #     publish_branch: gh-docs
+        git push origin docs
