@@ -1,5 +1,10 @@
 # Challenger Dataset
 
+# Rendered from challenger.qmd
+
+[Link to original
+file](https://github.com/tensorchiefs/data/tree/docs/data/challenger.qmd)
+
 ## Description
 
 This dataset contains information about the O-rings of the solid rocket
@@ -16,18 +21,9 @@ A nice background story about the Challenger disaster and the fatal data
 analysis done can be found in:
 https://homafiles.info/2016/06/06/the-challenger-disaster-a-tragic-lesson-in-data-analysis/
 
-``` r
-data <- edudat::load_data("challenger.csv")
-library(ggplot2)
-ggplot(data, aes(x = Temp, y = Failure)) +
-  geom_point() + 
-  xlab("Temperature (F)") +
-  ggtitle("Challenger O-Ring Data")
-```
-
 ![](challenger_files/figure-commonmark/plot-1.png)
 
-### Addtional Functions
+### Addtional Functionality
 
 ``` r
 library(ggplot2)
