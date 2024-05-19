@@ -10,7 +10,7 @@ if (!requireNamespace("roxygen2", quietly = TRUE)) {
 library(roxygen2)
 
 # Set the working directory to the package directory
-setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+#setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 
 # Document the package
 roxygenize()
