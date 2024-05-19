@@ -22,9 +22,9 @@ jobs:
         git config --global user.name 'github-actions[bot]'
         git config --global user.email 'github-actions[bot]@users.noreply.github.com'
 
-    # - name: Verify the PAT is set
-    #   run: echo "Checking PAT: ${{ secrets.MY_GITHUB_PAT }}"
-
+    - name: Verify the PAT is set
+      run: echo "Checking PAT: ${{ secrets.MY_GITHUB_PAT }}"
+    
     - name: Create a test file
       run: echo "This is a test file fuer debugging" > testfile.txt
 
