@@ -9,47 +9,50 @@ This repository contains [datasets](https://github.com/tensorchiefs/data/blob/ma
 
 **Installing the Released Version (no release yet)**
 
-    ``` r
-       install.packages("https://github.com/tensorchiefs/data/releases/download/testrelease/edudat_0.1.tar.gz", repos = NULL, type = "source")
-    ```           
+```r
+install.packages("https://github.com/tensorchiefs/data/releases/download/testrelease/edudat_0.1.tar.gz", repos = NULL, type = "source")
+```           
+
 **Using the R Package**:
 
 Load the `edudat` package and datasets:
   
-      ```R
-        library(edudat)
-        df <- load_data("challenger.csv")
-      ```
+```R
+library(edudat)
+df <- load_data("challenger.csv")
+```
       
 Showing the dataset and other functionality
   
-      ```R
-       show_data(df)
-       list_cache_files() #Lists all the cached files
-      ```
+```R
+show_data(df)
+list_cache_files() #Lists all the cached files
+```
       
 Using additional functions (currently only in R), like plot_data:
   
-      ```R
-      plot_data(df) + theme_minimal()
-      ```
-    Note that not all datasets have additional functions. They need to be defined in an accompanying qmd script.
+```R
+plot_data(df) + theme_minimal()
+```
+    
+Note that not all datasets have additional functions. They need to be defined in an accompanying qmd script.
 
 ### Python
 
-1.  **Installation of the Python Package**:
-    -   Install the `edudat` package from PyPI:
+**Installation of the Python Package**:
+Install the `edudat` package from PyPI:
 
-        ``` bash
-        pip install edudat
-        ```
-2.  **Using the Python Package**:
-    -   Load the CSV data in Python:
+``` bash
+pip install edudat
+```
 
-        ``` python
-        from edudat import load_data
-        df1 = load_data("challenger.csv")
-        ```
+**Using the Python Package**:
+Load the CSV data in Python:
+
+``` python
+from edudat import load_data
+df1 = load_data("challenger.csv")
+```
 
 ## Additional information/functionality on data sets
 
