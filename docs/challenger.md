@@ -3,6 +3,10 @@
 Rendered from
 [challenger.qmd](https://github.com/tensorchiefs/data/tree/docs/data/challenger.qmd)
 
+This file can be loaded with:
+
+    df = load_data('challenger.csv')
+
 ## Description
 
 This dataset contains information about the O-rings of the solid rocket
