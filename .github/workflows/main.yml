@@ -26,7 +26,7 @@ jobs:
       run: echo "Checking PAT: ${{ secrets.MY_GITHUB_PAT }}"
 
     - name: Create a test file
-      run: echo "This is a test file for debugging" > testfile.txt
+      run: echo "This is a test file fuer debugging" > testfile.txt
 
     - name: Add and commit the test file
       run: |
