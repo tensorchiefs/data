@@ -13,28 +13,51 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GITHUB_PAT: ${{ secrets.MY_GITHUB_PAT }}
+
     steps:
-    - name: Checkout repository 2
-      uses: actions/checkout@v2
+    - uses: actions/checkout@v4
+
+    - name: Set up R
+      uses: r-lib/actions/setup-r@v2
+
+    # - name: Install R dependencies
+    #   uses: r-lib/actions/setup-r-dependencies@v2
+    #   with:
+    #     cache-version: 2
+    #     extra-packages: |
+    #       any::ggplot2
+    #       any::rcmdcheck
+    #       any::remotes
+    #       any::rmarkdown
 
     - name: Set up Quarto
       uses: quarto-dev/quarto-actions/setup@v2
 
-    - name: Install R
-      uses: r-lib/actions/setup-r@v2
-
-    - name: Install R packages
+    - name: Install specific R packages
       run: |
         Rscript -e 'install.packages(c("rmarkdown", "ggplot2", "remotes"))'
-        Rscript -e 'remotes::install_github("tensorchiefs/data", subdir = "R/edudat", auth_token = Sys.getenv("GITHUB_PAT"), dependencies = TRUE, upgrade = "always", verbose = TRUE)'
+        Rscript -e 'remotes::install_github("tensorchiefs/data", subdir = "R/edudat", dependencies = TRUE, upgrade = "always", verbose = TRUE)'
 
-    - name: Render test.qmd document
+    - name: Render QMD files
       run: |
-        quarto render data/test.qmd --to html
+        quarto render data/*.qmd --to gfm
+    
+    - name: Commit and push rendered files to docs branch
+      run: |
+        git config --global user.name 'github-actions[bot]'
+        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+        git checkout docs
+        cp -r data/* .
+        git add .
+        git commit -m 'Update rendered documentation'
+        git push origin docs
+      env:
+        GITHUB_TOKEN: ${{ secrets.MY_GITHUB_PAT }}
 
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        personal_token: ${{ secrets.MY_GITHUB_PAT }}
-        publish_dir: ./data
-        publish_branch: gh-pages
+    # Optional deployment step, commented out for now
+    # - name: Deploy to GitHub Pages
+    #   uses: peaceiris/actions-gh-pages@v3
+    #   with:
+    #     personal_token: ${{ secrets.MY_GITHUB_PAT }}
+    #     publish_dir: ./data
+    #     publish_branch: gh-docs
