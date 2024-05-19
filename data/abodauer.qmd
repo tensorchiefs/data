@@ -1,7 +1,6 @@
 ---
 title: "Abodauern"
 ---
-Should be rendered at https://tensorchiefs.github.io/data/data/challenger.html
 
 ## Description
 
