@@ -1,12 +1,12 @@
 name: Render and Deploy All Quarto Documents
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+# on:
+#   push:
+#     branches:
+#       - main
+#   pull_request:
+#     branches:
+#       - main
 
 jobs:
   render:
