@@ -76,6 +76,11 @@ jobs:
       run: |
         Rscript -e 'install.packages(c("rmarkdown", "ggplot2", "remotes"))'
 
+    ## Since all running with the key we have to set it
+    - name: Set GitHub PAT
+      run: |
+        Rscript -e 'gitcreds::gitcreds_set(url = "https://github.com", password = Sys.getenv("MY_GITHUB_PAT"))'
+
     - name: Install edudat package
       run: | 
         Rscript -e 'remotes::install_github("tensorchiefs/data", subdir = "R/edudat", dependencies = TRUE, upgrade = "always", verbose = TRUE)'
