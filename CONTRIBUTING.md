@@ -12,6 +12,19 @@ To render the `.qmd` file in the `data` folder to the `.md` files in the `docs` 
 
 To build the R package, simply check in the files. If another user wants to build the package, they can simply check it out. However, using  `devtools::install_github("tensorchiefs/data/R/edudat")` is slow since it involves cloning, see also https://github.com/tensorchiefs/data/issues/2
 
+### Installation of the R Package (current version w/o building)**:
+    -   Install the `devtools` package if you haven't already:
+        ``` r
+        install.packages("devtools")
+        ```
+    
+    -   Install the `edudat` package directly from GitHub:
+    
+        ``` r
+        devtools::install_github("tensorchiefs/data/R/edudat")
+        ```
+
+
 ### Build the source in R:
 ```bash
 data % R CMD build R/edudat
