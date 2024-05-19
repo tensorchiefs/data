@@ -74,7 +74,7 @@ jobs:
 
     - name: Install specific R packages
       run: |
-        Rscript -e 'install.packages(c("rmarkdown", "ggplot2", "remotes"))'
+        Rscript -e 'install.packages(c("rmarkdown", "ggplot2", "remotes", "gitcreds"))'
 
     ## Since all running with the key we have to set it
     - name: Set GitHub PAT
