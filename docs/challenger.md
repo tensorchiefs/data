@@ -1,7 +1,7 @@
 # Challenger Dataset
 
-\[Rendered from
-\]challenger.qmd(https://github.com/tensorchiefs/data/tree/docs/data/challenger.qmd)
+Rendered from
+[challenger.qmd](https://github.com/tensorchiefs/data/tree/docs/data/challenger.qmd)
 
 ## Description
 
