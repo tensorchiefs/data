@@ -1,4 +1,3 @@
-library(yaml)
 #### Data Handling ####
 
 #' Get the cache directory based on the operating system
@@ -55,6 +54,8 @@ cache_file <- function(name, url, verbose = FALSE) {
 #' df <- load_data("nyt.yaml", show_code = TRUE) # Load the NYT dataset with instructions provided yaml file
 load_data <- function(source, verbose = FALSE) {
 
+  library(yaml)
+  
   save_attributes_to_yaml <- function(attributes_list, file_path) {
     write_yaml(attributes_list, file_path)
     if (verbose) message("Attributes saved to ", file_path)
@@ -118,7 +119,7 @@ load_data <- function(source, verbose = FALSE) {
 
 #' Load the Quarto documentation file from repository and cache it locally
 #' 
-#' @param name Name of the Quarto file (e.g., "challenger.qmd" or "test.csv.gz")
+#' @param name Name of the Quarto file (e.g., "challenger.qmd")
 #' @param verbose Logical indicating whether to print messages
 #' @return The path to the cached Quarto file
 load_quarto_file <- function(name, verbose = FALSE) {

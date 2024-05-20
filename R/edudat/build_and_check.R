@@ -9,8 +9,10 @@ if (!requireNamespace("roxygen2", quietly = TRUE)) {
 }
 library(roxygen2)
 
-# Set the working directory to the package directory
-#setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+# getting old working directory and setting new working directory
+oldwd <- getwd()
+setwd("R/edudat")
+
 
 # Document the package
 roxygenize()
@@ -23,4 +25,6 @@ check()
 
 # Optionally, install the package locally
 install()
+
+setwd(oldwd)
 

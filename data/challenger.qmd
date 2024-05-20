@@ -4,37 +4,56 @@ title: "Challenger Dataset"
 
 ## Description
 
-This dataset contains information about the O-rings of the solid rocket boosters used in the Space Shuttle program. The data was collected during the investigation of the Space Shuttle Challenger disaster in 1986 (Rogers commission). Here we provide a binarized version of the original dataset, where the dependent variable `y` indicates whether at least O-ring failed (1) or not (0). This data is often used as an example of logistic regression.
+<!-- ![](https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Challenger_explosion.jpg/296px-Challenger_explosion.jpg) -->
+This dataset contains information about the O-rings of the solid rocket boosters used in the Space Shuttle program. The data was collected during the investigation of the Space Shuttle Challenger disaster in 1986 (Rogers commission). Here we provide a binarized version of the original dataset, where the dependent variable `Failure` indicates whether at least O-ring failed (1) or not (0). This data is often used as an example of logistic regression.
 
-### Further Information
-A nice background story about the Challenger disaster and the fatal data analysis done can be found in:
-https://homafiles.info/2016/06/06/the-challenger-disaster-a-tragic-lesson-in-data-analysis/
 
 ```{r plot, echo=FALSE, eval=TRUE}
-data <- edudat::load_data("challenger.csv")
 library(ggplot2)
-ggplot(data, aes(x = Temp, y = Failure)) +
-  geom_point() + 
-  xlab("Temperature (F)") +
-  ggtitle("Challenger O-Ring Data")
+library(edudat)
+data <- load_data("challenger.csv")
+source_extra_code(data, verbose = FALSE)
+plot(data)
 ```
 
-### Addtional Functionality
-Additional functionality, note that this is not excecuted in the document. Also note the name.
 
-#### Standart Function
-Code junks named `plot_data` are reserved names and by convention they appear in many other datasets.
 
-```{r plot_data, echo=TRUE, eval=FALSE}
-#plot_data
-library(ggplot2)
-ggplot(data, aes(x = Temp, y = Failure)) +
-  geom_point() + 
-  xlab("Temperature (F)") +
-  ggtitle("Challenger O-Ring Data")
+### Further Information
+
+A nice background story about the Challenger disaster and the fatal data analysis done can be found [here](https://homafiles.info/2016/06/06/the-challenger-disaster-a-tragic-lesson-in-data-analysis/). Further infos [wiki](https://en.wikipedia.org/wiki/Space_Shuttle_Challenger_disaster)
+
+# For users of the "edudat" library
+
+### Additional Functionality with {r extra,}
+
+You can provide additional functionality, which can be used after loading. Important, this needs a code chunk, with name "{r extra}".
+
+```{r extra, echo=TRUE, eval=TRUE}
+#extra
+#Overwriting the plot function
+plot = function(df){
+  library(ggplot2)
+  p = ggplot(df, aes(x = Temp, y = Failure)) +
+    geom_point() + 
+    xlab("Temperature (F)") +
+    ggtitle("Challenger O-Ring Data")
+  return(p)
+}
+
+# Custom function to translate to celcius
+to_celcius = function(in_fahrenheit){
+  celcius = (in_fahrenheit - 32) * 5/9
+  return(celcius)
+}
 ```
 
-#### Custom Functions
-TODO
+### Checking Addtional Functionality
 
-
+```{r extra_check, echo=TRUE, eval=TRUE}
+library(ggplot2)
+library(edudat)
+source_extra_code(data, verbose = FALSE)
+data <- load_data("challenger.csv")
+plot(data) + theme_classic()
+to_celcius(data$Temp)
+```

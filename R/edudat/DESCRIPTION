@@ -8,3 +8,4 @@ Description: This package contains datasets for teaching statistics and data sci
 License: GPL-3
 RoxygenNote: 7.2.3
 Encoding: UTF-8
+Imports: ggplot2, yaml
