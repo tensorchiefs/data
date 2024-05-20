@@ -46,8 +46,6 @@ cache_file <- function(name, url, verbose = FALSE) {
 #'
 #' @param source Name of the dataset (e.g., "challenger.csv", "nyt.yaml", "https://zenodo.org/records/1319069/files/iris.csv")
 #' @param verbose Logical indicating whether to print messages
-#' @param show_code Logical indicating whether to just show code, 
-#' so that the data can be loaded w/o the package
 #' @return A data frame containing the dataset
 #' @export
 #' 
@@ -55,7 +53,7 @@ cache_file <- function(name, url, verbose = FALSE) {
 #' df <- load_data("challenger.csv") # Load the Challenger dataset from the package
 #' df <- load_data("https://zenodo.org/records/1319069/files/iris.csv") # Load the Iris dataset from Zenodo
 #' df <- load_data("nyt.yaml", show_code = TRUE) # Load the NYT dataset with instructions provided yaml file
-load_data <- function(source, verbose = FALSE, show_code = FALSE) {
+load_data <- function(source, verbose = FALSE) {
 
   save_attributes_to_yaml <- function(attributes_list, file_path) {
     write_yaml(attributes_list, file_path)
@@ -111,13 +109,9 @@ load_data <- function(source, verbose = FALSE, show_code = FALSE) {
   file_path <- file.path(get_cache_dir(), paste0(name,".yaml"))
   save_attributes_to_yaml(attributes, file_path)
   
-  # Show the code if requested, by printing the data frame
-  if (show_code) {
-    message("# Copy&Paste this code to load the data into R:")
-    message("df <- read.csv(\"", download_url, "\", stringsAsFactors = FALSE)")
-    message("# Copy&Paste this code to load the data into Python (need pandas as pd)")
-    message("df = pd.read_csv(\"", download_url, "\")")
-  }
+  # Setting the S3 class attributes
+  class(df) = c("edudat", class(df))
+  
   
   return (df)
 }
