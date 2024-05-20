@@ -10,7 +10,7 @@ This repository contains [datasets](https://github.com/tensorchiefs/data/blob/ma
 **Installing the Released Version (no release yet)**
 
 ```r
-install.packages("https://github.com/tensorchiefs/data/releases/download/testrelease/edudat_0.1.tar.gz", repos = NULL, type = "source")
+install.packages("https://github.com/tensorchiefs/data/releases/download/testrelease2/edudat_0.1.tar.gz", repos = NULL, type = "source")
 ```           
 
 **Using the R Package**:
