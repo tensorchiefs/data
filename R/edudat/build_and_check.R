@@ -1,3 +1,7 @@
+#############################################
+### PLEASE RESTART R BEFORE RUNNING THIS SCRIPT ###
+#############################################
+
 # Load necessary libraries
 if (!requireNamespace("devtools", quietly = TRUE)) {
   install.packages("devtools")

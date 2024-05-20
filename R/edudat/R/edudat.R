@@ -3,6 +3,7 @@
 #' Get the cache directory based on the operating system
 #'
 #' @return The path to the cache directory
+#' @export
 get_cache_dir <- function() {
   if (.Platform$OS.type == "windows") {
     return(normalizePath(file.path(Sys.getenv("USERPROFILE"), ".edudat_cache"), winslash = "/", mustWork = FALSE))
@@ -104,9 +105,14 @@ load_data <- function(source, verbose = FALSE) {
   # Adding attributes to the data frame
   attr(df, "dataset_name") <- name
   attr(df, "download_url") <- download_url
+  attr(df, "source") <- source
   
   # Save the attributes to a YAML file
-  attributes = c(attributes, list(dataset_name = name, download_url = download_url))
+  attributes = c(attributes, list(
+    dataset_name = name, 
+    download_url = download_url, 
+    source=source
+  ))
   file_path <- file.path(get_cache_dir(), paste0(name,".yaml"))
   save_attributes_to_yaml(attributes, file_path)
   
@@ -116,6 +122,23 @@ load_data <- function(source, verbose = FALSE) {
   
   return (df)
 }
+
+
+#' returns the YAML-Arributes of a dataset
+#' 
+#' @param name Name of the dataset (e.g., "challenger")
+#' @return A list containing the YAML attributes of the dataset or NULL if the dataset does not exist
+#' @export
+get_yaml_attributes <- function(name) {
+  file_path <- file.path(get_cache_dir(), paste0(name,".yaml"))
+  # check if the file exists
+  if (!file.exists(file_path)) {
+    return(NULL)
+  }
+  attributes <- yaml::read_yaml(file_path)
+  return(attributes)
+}
+
 
 #' Load the Quarto documentation file from repository and cache it locally
 #' 

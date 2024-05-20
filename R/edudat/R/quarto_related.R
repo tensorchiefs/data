@@ -19,3 +19,58 @@ show_code <- function(df) {
   return(code_str)
 }
 
+#' Generate R and Python code showing how to load a dataset, which is needed in quarto documents
+#'
+#' @param attributes A list containing the attributes of the dataset, including 'download_url' and 'source'
+#' @return No return value, called for side effects. Outputs formatted R and Python code for loading the data.
+#' @export
+#' @examples 
+#' 
+#' ```{r, echo=FALSE, eval=TRUE, message=FALSE, results='asis'} 
+#' library(edudat)
+#' df = load_data('abodauer.csv.gz') 
+#' attributes = attributes(df)
+#' show_loading(attributes(df))
+#' ```
+show_loading <- function(attributes) {
+  r_code <-  sprintf("df <- read.csv(\"%s\", stringsAsFactors = FALSE)", attributes$download_url)
+  r_code2 <- sprintf("df <- edudat::load_data(\"%s\")", attributes$source)
+  py_code <- sprintf("df = pd.read_csv(\"%s\")", attributes$download_url)
+  
+  if (knitr::is_html_output()) {
+    cat(
+      "## Copy & Paste this code to load the data into R:\n\n",
+      "<pre><code class='language-r'>\n",
+      r_code,
+      "\n</code></pre>\n\n",
+      "## Copy & Paste this code to load the data into Python (need pandas as pd):\n\n",
+      "<pre><code class='language-python'>\n",
+      py_code,
+      "\n</code></pre>\n",
+      sep = ""
+    )
+  } else if (knitr::is_latex_output()) {
+    cat(
+      "\\begin{framed}\n",
+      "Loading: \\newline \n",
+      "\\footnotesize\n",  # Make the text smaller
+      "Copy and Paste this code to load the data into R:\n\n",
+      "\\begin{verbatim}\n",
+      r_code,
+      "\n\\end{verbatim}\n\n",
+      "Using the edudat package (see https://github.com/tensorchiefs/data/):\n\n",
+      "\\begin{verbatim}\n",
+      r_code2,
+      "\n\\end{verbatim}\n\n",
+      "Copy and Paste this code to load the data into Python (need pandas as pd):\n\n",
+      "\\begin{verbatim}\n",
+      py_code,
+      "\n\\end{verbatim}\n",
+      "\\end{framed}\n",
+      sep = ""
+    )
+  } else {
+    cat("Output format not supported.")
+  }
+}
+

@@ -3,7 +3,7 @@
 Rendered from
 [challenger.qmd](https://github.com/tensorchiefs/data/tree/docs/data/challenger.qmd)
 
-This file can be loaded with:
+This file can be loaded using edudat with:
 
 ``` r
 df = load_data('challenger.csv')

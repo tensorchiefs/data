@@ -3,7 +3,7 @@
 Rendered from
 [lr4.qmd](https://github.com/tensorchiefs/data/tree/docs/data/lr4.qmd)
 
-This file can be loaded with:
+This file can be loaded using edudat with:
 
 ``` r
 df = load_data('lr4.csv')

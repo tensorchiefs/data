@@ -3,10 +3,10 @@
 Rendered from
 [abodauer.qmd](https://github.com/tensorchiefs/data/tree/docs/data/abodauer.qmd)
 
-This file can be loaded with:
+This file can be loaded using edudat with:
 
 ``` r
-df = load_data('abodauer.csv')
+df = load_data('abodauer.csv.gz')
 ```
 
 ## Description
