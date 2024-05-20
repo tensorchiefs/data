@@ -1,6 +1,6 @@
 # Tensorchiefs Data Collection and Tools
 
-This repository contains [datasets](https://github.com/tensorchiefs/data/blob/main/docs/) as well as R and Python packages for teaching statistics, data science, and related subjects.
+This repository contains [datasets](https://github.com/tensorchiefs/data/blob/main/docs/) as well as R and Python packages for teaching statistics, data science, and related subjects. Our goal is that this package can be used from Python or R on a local machine or in the cloud with the same syntax. All files are cached and dataset-specific functionality can be defined in the optional documentation markdown file. 
 
 
 ## Installation and simple Usage
@@ -29,13 +29,15 @@ show_data(df)
 list_cache_files() #Lists all the cached files
 ```
       
-Using additional functions (currently only in R), like plot_data:
+Sourcing additional functions (currently only in R)
   
 ```R
-plot_data(df) + theme_minimal()
+source_extra_code(df, verbose = TRUE)
+plot(df) + ggtitle("Challenger dataset")
+to_celcius(df$Temp)
 ```
     
-Note that not all datasets have additional functions. They need to be defined in an accompanying qmd script.
+Note that not all datasets have additional functions. They need to be defined in an accompanying qmd script in an code section named `extra`, see [data/challenger.qmd](data/challenger.qmd)
 
 ### Python
 
