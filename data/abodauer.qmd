@@ -9,7 +9,7 @@ This data set contains the time (in month) a swiss newpaper has been subscribed 
 ## Plotting in R
 
 ```{r plot_data, echo=TRUE, eval=TRUE}
-data <- edudat::load_data("abodauer.csv")
+data <- edudat::load_data("abodauer.csv.gz")
 library(ggplot2)
 ggplot(data, aes(x = x)) +
   geom_histogram() + 

@@ -9,9 +9,6 @@ This file can be loaded with:
 df = load_data('abodauer.csv')
 ```
 
-Should be rendered at
-https://tensorchiefs.github.io/data/data/challenger.html
-
 ## Description
 
 This data set contains the time (in month) a swiss newpaper has been
@@ -20,7 +17,7 @@ subscribed to by a customer.
 ## Plotting in R
 
 ``` r
-data <- edudat::load_data("abodauer.csv")
+data <- edudat::load_data("abodauer.csv.gz")
 library(ggplot2)
 ggplot(data, aes(x = x)) +
   geom_histogram() + 
