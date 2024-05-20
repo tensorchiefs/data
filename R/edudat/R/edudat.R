@@ -1,24 +1,4 @@
-#### Using Functions defined in quarto document ####
-
-#' Plot data using the function defined in the Quarto document
-#'
-#' @param df A data frame containing the dataset
-#' @export
-#' @examples
-#' df <- load_data("challenger.csv")
-#' plot_data(df)
-plot_data <- function(df) {
-  # Get the name of the dataset from the attribute
-  dataset_name <- attr(df, "dataset_name")
-  quarto_file = load_quarto_file(paste0(dataset_name, ".qmd")) 
-  if (file.exists(quarto_file)) {
-    execute_quarto_chunk(quarto_file, "plot_function")
-  } else {
-    stop("Quarto document not found: ", quarto_file)
-  }
-}
-
-
+library(yaml)
 #### Data Handling ####
 
 #' Get the cache directory based on the operating system
@@ -62,33 +42,74 @@ cache_file <- function(name, url, verbose = FALSE) {
   return(file_path)
 }
 
-#' Load dataset from GitHub and cache it locally
+#' Load dataset from various sources and cache it locally
 #'
-#' @param name Name of the dataset (e.g., "challenger.csv")
+#' @param source Name of the dataset (e.g., "challenger.csv", "nyt.yaml", "https://zenodo.org/records/1319069/files/iris.csv")
 #' @param verbose Logical indicating whether to print messages
 #' @param show_code Logical indicating whether to just show code, 
 #' so that the data can be loaded w/o the package
 #' @return A data frame containing the dataset
 #' @export
-load_data <- function(name, verbose = FALSE, show_code = FALSE) {
-  # Throw an error if the file name does not end with ".csv"
-  if (!grepl(".csv$", name)) {
-    stop("Invalid file format. Currently only CSV Files are supported.")
+#' 
+#' @examples
+#' df <- load_data("challenger.csv") # Load the Challenger dataset from the package
+#' df <- load_data("https://zenodo.org/records/1319069/files/iris.csv") # Load the Iris dataset from Zenodo
+#' df <- load_data("nyt.yaml", show_code = TRUE) # Load the NYT dataset with instructions provided yaml file
+load_data <- function(source, verbose = FALSE, show_code = FALSE) {
+
+  save_attributes_to_yaml <- function(attributes_list, file_path) {
+    write_yaml(attributes_list, file_path)
+    if (verbose) message("Attributes saved to ", file_path)
   }
   
-  # URL for downloading the dataset
-  download_url <- paste0("https://raw.githubusercontent.com/tensorchiefs/data/main/data/", name)
+  get_data_file_extension <- function(source) {
+    if (grepl(".csv$", source)) {
+      return("csv")
+    } else if (grepl(".csv.gz$", source)) {
+      return("csv.gz")
+    } else {
+      stop(paste0("Invalid Extension in", source))
+    }
+  }
+  
+  attributes <- list()
+  data_file_extension = NULL
+ 
+  if (grepl("^https?://", source)) { # Source is a URL
+    download_url <- source
+    name <- basename(source)
+  } else if (grepl(".csv$", source) || grepl(".csv.gz$", source)) { # Source is internal CSV file
+    download_url <- paste0("https://raw.githubusercontent.com/tensorchiefs/data/main/data/", source)
+    name <- source
+  } else if (grepl(".yaml$", source)) { # Check if the source is a YAML file
+    source_url <- paste0("https://raw.githubusercontent.com/tensorchiefs/data/main/data/", source)
+    attributes <- yaml::read_yaml(source_url)
+    download_url <- attributes$source
+    name <- source #basename(download_url)
+  } else {
+    stop("Invalid source")
+  }
+  
+  data_file_extension = get_data_file_extension(download_url)
+  
+  # Remove the file extension from the name
+  name <- gsub("\\.csv\\.gz$", "", name)
+  name <- gsub("\\.csv$", "", name)
+  name <- gsub("\\.yaml$", "", name)
   
   # Cache the file and get the path
-  file_path <- cache_file(name, download_url, verbose)
-  
+  file_path <- cache_file(paste0(name, ".", data_file_extension), download_url, verbose)
   # Load the data into a data frame
   df = read.csv(file_path, stringsAsFactors = FALSE)
   
-  # Adding the dataset name as an attribute i.e. strip .csv or .csv.gz
-  name = gsub(".csv.gz", "", name)
-  name = gsub(".csv", "", name)
+  # Adding attributes to the data frame
   attr(df, "dataset_name") <- name
+  attr(df, "download_url") <- download_url
+  
+  # Save the attributes to a YAML file
+  attributes = c(attributes, list(dataset_name = name, download_url = download_url))
+  file_path <- file.path(get_cache_dir(), paste0(name,".yaml"))
+  save_attributes_to_yaml(attributes, file_path)
   
   # Show the code if requested, by printing the data frame
   if (show_code) {
@@ -149,126 +170,6 @@ list_cache_files <- function() {
   return(file_details)
 }
 
-### misc functions ####
-
-#' Open the documentation page for a dataset in the default web browser
-#' 
-#' @param df A data frame containing the dataset
-#' @export
-#' @examples
-#' df <- load_data("challenger.csv")
-#' show_data(df)
-show_data = function(df) {
-  dataset_name <- attr(df, "dataset_name")
-  doc_url <- paste0("https://github.com/tensorchiefs/data/blob/main/docs/", dataset_name, ".md")
-  # If using RStudio and prefer to open in the Viewer pane
-  #if (rstudioapi::isAvailable()) {
-  #  rstudioapi::viewer("https://github.com/tensorchiefs/data/blob/main/docs/challenger.md")
-  #} else{
-  browseURL(doc_url)
-  #}
-}
-
-#' Show a mini help page in the RStudio Viewer pane
-#' 
-#' @export
-show_mini_help <- function() {
-  # Define the URL and the display text
-  html_content <- "
-  <html>
-  <body>
-  
-  <h2>edudat package</h2>
-  
-  <b>Loading the data:</b>
-  <pre>
-  <code>
-  df <- edudat::load_data('challenger.csv')
-  plot_data(df)
-  </code>
-  </pre>
-  
-  <b>Info:</b>
-  <pre>
-  <code>
-  edudat::list_cache_files()
-  </code>
-  </pre>
-  
-  For more see: 
-  <a href='https://github.com/tensorchiefs/data/'>github.com/tensorchiefs/data/</a>
-  or the 
-  <a href='https://github.com/tensorchiefs/data/tree/main/docs'>docs</a> 
- 
-  
-  </body>
-  </html>"
-  
-  # Write the HTML content to a temporary file
-  temp_file <- tempfile(fileext = ".html")
-  writeLines(html_content, temp_file)
-  
-  # Open the HTML file in the Viewer pane
-  if (rstudioapi::isAvailable()) {
-      rstudioapi::viewer(temp_file)
-  } else {
-    # Alternative code or error handling for non-RStudio environment
-    stop("This function requires RStudio to be running")
-  }
-  
-}
-
-#' Convert a data frame to a Stan data list
-#'
-#' This function takes a data frame, looks for a column named 'y', and creates 
-#' a data list for Stan. If no column named 'y' is found, it uses the last column 
-#' as the response variable and issues a warning. The name for the number of covariates 
-#' can be customized.
-#'
-#' @param df A data frame containing the covariates and response variable.
-#' @param covariate_count_name A string specifying the name for the number of covariates (default is "K").
-#' @return A list suitable for use with Stan, containing the number of observations (N),
-#' the number of covariates, the response variable (y), and the covariates matrix (x).
-#' @examples
-#' # Create a sample data frame
-#' df <- data.frame(
-#'   x1 = rnorm(100),
-#'   x2 = rnorm(100),
-#'   x3 = rnorm(100),
-#'   y = rnorm(100)
-#' )
-#' # Convert the data frame to Stan data list
-#' stan_data <- as.stan_data(df)
-#' # Convert the data frame to Stan data list with custom covariate count name
-#' stan_data <- as.stan_data(df, covariate_count_name = "p")
-#' @export
-as.stan_data <- function(df, covariate_count_name = "K") {
-  # Check if the data frame contains a column named "y"
-  if ("y" %in% colnames(df)) {
-    response_var <- df$y
-    covariates <- df[, setdiff(names(df), "y")]
-  } else {
-    # Issue a warning if "y" is not found and use the last column as the response variable
-    warning("No column named 'y' found. Using the last column as the response variable.")
-    response_var <- df[, ncol(df)]
-    covariates <- df[, -ncol(df)]
-  }
-  
-  # Convert covariates to a matrix
-  covariates_matrix <- as.matrix(covariates)
-  
-  # Create the data list for Stan
-  stan_data <- list(
-    N = nrow(df),            # Number of observations
-    y = response_var,        # Response variable
-    x = covariates_matrix    # Covariates matrix
-  )
-  
-  # Add the number of covariates with the specified name
-  stan_data[[covariate_count_name]] <- ncol(covariates_matrix)
-  
-  return(stan_data)
-}
 
 
 

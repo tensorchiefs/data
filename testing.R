@@ -1,0 +1,22 @@
+# Sources all for fast delelopment without building
+source("R/edudat/R/edudat.R")
+source("R/edudat/R/df_utils.R")
+source("R/edudat/R/internal.R")
+source("R/edudat/R/misc_functions.R")
+source("R/edudat/R/quarto_related.R")
+
+
+# Load the Challenger dataset from the package
+df <- load_data("challenger.csv", verbose = TRUE)
+
+# Load the Iris dataset from Zenodo
+df <- load_data("https://zenodo.org/records/1319069/files/iris.csv", verbose = TRUE)
+attributes(df)
+
+# Load the larger dataset from Zenodo (via YAML file)
+df <- load_data("zenodo.5126651.bl.yaml", verbose = TRUE)
+attributes(df)
+
+# Load the Abodauern dataset from the package (in csv.gz)
+df <- load_data("abodauer.csv.gz", verbose = TRUE)
+attributes(df)
