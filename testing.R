@@ -64,5 +64,8 @@ show_loading(attributes(df))
 # export(show_mini_help)
 # export(source_extra_code)
 
+df = load_data('sbp.csv')
+show_data(df)
+
 
 

@@ -32,10 +32,9 @@ show_code <- function(df) {
 #' attributes = attributes(df)
 #' show_loading(attributes(df))
 #' ```
-show_loading <- function(attributes) {
-  r_code <-  sprintf("df <- read.csv(\"%s\", stringsAsFactors = FALSE)", attributes$download_url)
+show_loading <- function(attributes, show_python = FALSE) {
+  r_code <-  sprintf("df <- read.csv(\"%s\")", attributes$download_url)
   r_code2 <- sprintf("df <- edudat::load_data(\"%s\")", attributes$source)
-  py_code <- sprintf("df = pd.read_csv(\"%s\")", attributes$download_url)
   
   if (knitr::is_html_output()) {
     cat(
@@ -50,26 +49,45 @@ show_loading <- function(attributes) {
       sep = ""
     )
   } else if (knitr::is_latex_output()) {
-    cat(
-      "\\begin{framed}\n",
-      "Loading: \\newline \n",
-      "\\footnotesize\n",  # Make the text smaller
-      "Copy and Paste this code to load the data into R:\n\n",
-      "\\begin{verbatim}\n",
-      r_code,
-      "\n\\end{verbatim}\n\n",
-      "Using the edudat package (see https://github.com/tensorchiefs/data/):\n\n",
-      "\\begin{verbatim}\n",
-      r_code2,
-      "\n\\end{verbatim}\n\n",
-      "Copy and Paste this code to load the data into Python (need pandas as pd):\n\n",
-      "\\begin{verbatim}\n",
-      py_code,
-      "\n\\end{verbatim}\n",
-      "\\end{framed}\n",
-      sep = ""
-    )
-  } else {
+    if (show_python) {
+      cat(
+        "\\begin{framed}\n",
+        "Loading: \\newline \n",
+        "\\footnotesize\n",  # Make the text smaller
+        "Copy and Paste this code to load the data into R:\n\n",
+        "\\begin{verbatim}\n",
+        r_code,
+        "\n\\end{verbatim}\n\n",
+        "Using the edudat package (see https://github.com/tensorchiefs/data/):\n\n",
+        "\\begin{verbatim}\n",
+        r_code2,
+        "\n\\end{verbatim}\n\n",
+        "Copy and Paste this code to load the data into Python (need pandas as pd):\n\n",
+        "\\begin{verbatim}\n",
+        py_code,
+        "\n\\end{verbatim}\n",
+        "\\end{framed}\n",
+        sep = ""
+      )
+    }else {
+      cat(
+        "\\begin{framed}\n",
+        "Loading: \\newline \n",
+        "\\footnotesize\n",  # Make the text smaller
+        "Copy and Paste this code to load the data into R:\n\n",
+        "\\begin{verbatim}\n",
+        r_code,
+        "\n\\end{verbatim}\n\n",
+        "Using the edudat package (see https://github.com/tensorchiefs/data/):\n\n",
+        "\\begin{verbatim}\n",
+        r_code2,
+        "\n\\end{verbatim}\n\n",
+        "\\end{framed}\n",
+        sep = ""
+      )
+      }#Phython
+    } #Latex
+  else {
     cat("Output format not supported.")
   }
 }

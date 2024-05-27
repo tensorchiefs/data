@@ -32,3 +32,4 @@ data/challenger_files/figure-html/plot_data-1.png
 R/edudat/man/load_data.Rd
 *.Rproj
 edudat_0.1.tar.gz
+/test_excercise_local
