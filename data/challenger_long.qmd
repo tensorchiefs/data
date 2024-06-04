@@ -1,0 +1,46 @@
+---
+title: "Challenger Dataset (long Version)"
+---
+
+## Description
+
+The long version of the Challenger Dataset.
+
+```{r data, echo=FALSE, eval=FALSE}
+# A longer version of the Challenger data
+library(alr4)
+library(mosaic)
+library(DT)
+library(pander)
+datatable(Challeng)
+date = rownames(Challeng)
+Challeng = rename(Challeng, c("Temp" = "temp"))
+Challeng$Date = as.Date(date, format = "%m/%d/%y")
+write.csv(Challeng, "challenger_long.csv", row.names = FALSE)
+```
+
+## Comparison
+```{r comparison, echo=TRUE, eval=TRUE}
+library(edudat)
+ds = load_data("challenger.csv")
+dl = load_data("challenger_long.csv")
+data.frame(dl$fail, ds$Fail) #Same failures
+```
+
+
+## Plot
+```{r plot, echo=TRUE, eval=TRUE}
+library(ggplot2)
+library(edudat)
+data <- load_data("challenger_long.csv")
+# Create the plot
+ggplot(data, aes(x = Temp, y = fail, col=Date)) +
+  geom_point() +
+  labs(title = "Temperature vs Failures with Dates",
+       x = "Temperature (F)",
+       y = "Failures") +
+  theme_minimal()
+plot(data)
+```
+
+
