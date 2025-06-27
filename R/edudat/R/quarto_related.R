@@ -21,7 +21,7 @@ show_code <- function(df) {
 
 #' Generate R and Python code showing how to load a dataset, which is needed in quarto documents
 #'
-#' @param attributes A list containing the attributes of the dataset, including 'download_url' and 'source'
+#' @param df The edudat dataset, including 'download_url' and 'source' in the attributes
 #' @return No return value, called for side effects. Outputs formatted R and Python code for loading the data.
 #' @export
 #' @examples 
@@ -32,7 +32,8 @@ show_code <- function(df) {
 #' attributes = attributes(df)
 #' show_loading(attributes(df))
 #' ```
-show_loading <- function(attributes, show_python = FALSE) {
+show_loading <- function(df, show_python = FALSE) {
+  attributes <- attributes(df)
   r_code <-  sprintf("df <- read.csv(\"%s\")", attributes$download_url)
   r_code2 <- sprintf("df <- edudat::load_data(\"%s\")", attributes$source)
   

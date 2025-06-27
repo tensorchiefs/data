@@ -1,0 +1,68 @@
+---
+title: "Wells Data"
+---
+
+## Description (from rstanarm)
+A survey of 3200 residents in a small area of Bangladesh suffering from arsenic contamination of groundwater. 
+Respondents with elevated arsenic levels in their wells had been encouraged to switch their water source to a safe public or private well in the nearby area (dist meters away) and the survey was conducted several years later to learn which of the affected residents had switched wells.
+
+Souce: Gelman and Hill (2007)
+
+3020 obs. of 5 variables
+
+- switch Indicator for well-switching
+
+- arsenic Arsenic level in respondent's well
+
+- dist Distance (meters) from the respondent's house to the nearest well with safe drinking water.
+
+- assoc Indicator for member(s) of household participate in community organizations
+
+- educ Years of education (head of household)
+
+Gelman, A. and Hill, J. (2007). Data Analysis Using Regression and Multilevel/Hierarchical Models. Cambridge University Press, Cambridge, UK. https://stat.columbia.edu/~gelman/arm/
+
+
+
+
+```{r, echo=TRUE, eval=FALSE}
+  # Importing of the data
+  library(rstanarm)
+  data(wells)
+  ?wells
+  write.csv(wells, "wells.csv", row.names = FALSE)
+  
+  if (FALSE){ 
+    # More info
+    install.packages("haven")
+    library(haven)
+    d = read_dta('/Users/oli/Downloads/ARM_Data/arsenic/all.dta')
+  }
+  
+```
+
+
+
+## Data
+
+```{r plot_data, echo=TRUE, eval=TRUE}
+data <- edudat::load_data("wells.csv")
+summary(data)
+```
+
+```{r plot1, echo=FALSE, eval=FALSE}
+library(ggplot2)
+
+```
+
+```{r plot, echo=FALSE, eval=FALSE}
+library(ggplot2)
+ggplot(wells, aes(x = dist, y = ..density.., fill = switch == 1)) +
+  geom_density(alpha=0.5) +
+  scale_fill_manual(values = c("gray30", "skyblue"))
+```
+So especially people which are living close to a contaminated well are more likely to switch to a safe well. 
+
+
+
+

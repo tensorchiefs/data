@@ -1,0 +1,42 @@
+---
+title: "Fish Data"
+---
+
+## Description
+The data-set contains the number of Fish a group of camper caught in a state park (taken from https://stats.idre.ucla.edu/r/dae/zip/). The task here is to predict the number of fish caught by a fishing party. We have a small data set, of 250 groups, which visited a state park and provided the following information:
+
+- how many people are in the group
+- the number children in the group
+- the use of live bait
+- whether the group came with a camper to the park.
+
+```{r, echo=FALSE, eval=FALSE}
+  # Importing of the data
+  df <- read.csv("https://stats.idre.ucla.edu/stat/data/fish.csv")
+  write.csv(df, "fish.csv", row.names = FALSE)
+```
+
+
+
+## Investiating the Zero Inflated Data
+
+```{r plot_data, echo=TRUE, eval=TRUE}
+data <- edudat::load_data("fish.csv")
+plot(table(data$count), xlim=c(0, 10), col="lightblue", main="Histogram of Fish Caught", xlab="Number of Fish Caught")
+```
+
+
+## Investiating the Zero Inflated Data
+```{r zib, echo=TRUE, eval=FALSE}
+data <- edudat::load_data("fish.csv")
+# Creating factor variables
+data <- within(data, {
+    nofish <- factor(nofish)
+    livebait <- factor(livebait)
+    camper <- factor(camper)
+})
+str(data)
+library(pscl)
+summary(m1 <- zeroinfl(count ~ child + camper | persons, data = data))
+```
+
